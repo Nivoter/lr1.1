@@ -2,7 +2,7 @@
  * File:   main.c
  * Author: user
  *
- * Created on 13 ôåâðàëÿ 2018 ã., 18:12
+ * Created on 13 Ñ„ÐµÐ²Ñ€Ð°Ð»Ñ 2018 Ð³., 18:12
  */
 
 // PIC18F4525 Configuration Bit Settings
@@ -75,40 +75,39 @@
  * 
  */
 int main(int argc, char** argv) {
-    //long t;
-    long u=0; // êîëè÷åñòâî öèêëîâ
-    unsigned char i=0;// âûáîð äåéñòâèÿ
-    unsigned char g=1; // ïðîâåðêà âêë êíîïêà
+    unsigned char j=0;
+    long u=0; // ÐºÐ¾Ð»Ð¸Ñ‡ÐµÑÑ‚Ð²Ð¾ Ñ†Ð¸ÐºÐ»Ð¾Ð²
+    unsigned char i=0;// Ð²Ñ‹Ð±Ð¾Ñ€ Ð´ÐµÐ¹ÑÑ‚Ð²Ð¸Ñ
+    unsigned char g=0; // Ð¿Ñ€Ð¾Ð²ÐµÑ€ÐºÐ° Ð²ÐºÐ» ÐºÐ½Ð¾Ð¿ÐºÐ°
     int f=0;
     TRISA4 =1;
     TRISB3 =0;
     TRISC0 =0;
     while(1)
     {
-        if(g==1 && PORTAbits.RA4 == 0)
+        if(PORTAbits.RA4 == 0)
         {
-            f++;
-            if(f==1000)
+            if(g==0)
             {
-                if(PORTAbits.RA4 == 0)
+                f++;
+                if(f==1000)
                 {
-                    f=0;
-                    g=0;
-                    i++;
-                    if(i>2)
+                    if(PORTAbits.RA4 == 0)
                     {
-                        i=0;
+                        f=0;
+                        i++;
+                        if(i>2)
+                        {
+                            i=0;
+                        }
+                        g=1;
                     }
                 }
             }
         }
-        if(g==0 && PORTAbits.RA4==1)
+        else
         {
-            f++;
-            if(f==1000)
-            {
-                g=1;
-            }
+            g=0;
         }
         u++;
         if(u>100000)
